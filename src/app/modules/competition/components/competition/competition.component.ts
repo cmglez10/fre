@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ICompetitionTable } from '../../services/competition/interfaces/competition.interface';
 
 @Component({
-  selector: 'app-competition',
+  selector: 'fre-competition',
   templateUrl: './competition.component.html',
   styleUrls: ['./competition.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +26,6 @@ export class CompetitionComponent {
   ];
 
   constructor(private readonly competitionService: CompetitionService) {
-    this.tableData = toSignal(this.competitionService.getCompetitionTable());
+    this.tableData = toSignal(this.competitionService.getCompetitionTable(1));
   }
 }

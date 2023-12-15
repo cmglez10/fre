@@ -1,118 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ICompetitionTable } from './interfaces/competition.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CompetitionService {
+  private readonly BASE_URL = '/api/';
+
   constructor(private readonly _httpClient: HttpClient) {}
 
-  public getCompetitionTable(): Observable<ICompetitionTable> {
-    return of([
-      {
-        antColor: 0,
-        posColor: 1,
-        position: 1,
-        teamName: 'Real Madrid',
-        teamId: 10102,
-        teamLogoId: 10001,
-        playedGames: 5,
-        won: 4,
-        draw: 1,
-        lost: 0,
-        points: 13,
-        goalsFor: 12,
-        goalsAgainst: 3,
-        goalDifference: 9,
-        sanction: 0,
-      },
-      {
-        antColor: 0,
-        posColor: 2,
-        position: 2,
-        teamName: 'Barcelona',
-        teamLogoId: 10661,
-        teamId: 2,
-        playedGames: 5,
-        won: 3,
-        draw: 2,
-        lost: 0,
-        points: 11,
-        goalsFor: 8,
-        goalsAgainst: 5,
-        goalDifference: 3,
-        sanction: 0,
-      },
-      {
-        antColor: 0,
-        posColor: 2,
-        position: 3,
-        teamName: 'Sevilla',
-        teamLogoId: 10660,
-        teamId: 3,
-        playedGames: 5,
-        won: 3,
-        draw: 1,
-        lost: 1,
-        points: 10,
-        goalsFor: 7,
-        goalsAgainst: 4,
-        goalDifference: 3,
-        sanction: 0,
-      },
-      {
-        antColor: 0,
-        posColor: 2,
-        position: 4,
-        teamName: 'Atletico Madrid',
-        teamId: 4,
-        teamLogoId: 10659,
-        playedGames: 5,
-        won: 3,
-        draw: 1,
-        lost: 1,
-        points: 10,
-        goalsFor: 7,
-        goalsAgainst: 4,
-        goalDifference: 3,
-        sanction: 0,
-      },
-      {
-        antColor: 0,
-        posColor: 0,
-        position: 5,
-        teamName: 'Real Sociedad',
-        teamId: 5,
-        teamLogoId: 10658,
-        playedGames: 5,
-        won: 3,
-        draw: 0,
-        lost: 2,
-        points: 9,
-        goalsFor: 6,
-        goalsAgainst: 3,
-        goalDifference: 3,
-        sanction: 0,
-      },
-      {
-        antColor: 2,
-        posColor: 0,
-        position: 6,
-        teamName: 'Cadiz',
-        teamId: 6,
-        teamLogoId: 10657,
-        playedGames: 5,
-        won: 3,
-        draw: 0,
-        lost: 2,
-        points: 9,
-        goalsFor: 6,
-        goalsAgainst: 19,
-        goalDifference: -13,
-        sanction: 0,
-      },
-    ]);
+  public getCompetitionTable(
+    competitionId: number
+  ): Observable<ICompetitionTable> {
+    return this._httpClient.get<ICompetitionTable>(
+      `${this.BASE_URL}clasificaciones/${competitionId}`
+    );
   }
 }
